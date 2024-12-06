@@ -1,0 +1,3 @@
+Data Description
+
+H&E stained image patches from prostate cancer Tissue Microarrays and the corresponding Gleason score in folder name. The data is generated using a subset of the data used in the paper: Automated Gleason grading of prostate cancer tissue microarrays via deep learning by Arvaniti et. al.
