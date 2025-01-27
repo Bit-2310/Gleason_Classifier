@@ -15,29 +15,29 @@ Here are some visualizations to better understand the results:
 ![Original and Augmented Images](images/data.png)
 
 #### Training Metrics for EfficientNet
-![Training Metrics EfficientNet](images/EfficientNet Train.png)
+![Training Metrics EfficientNet](images/EffecientNet_Tain.png)
 
 #### Training Metrics for ResNet-50
-![Training Metrics ResNet-50](images/ResNet-50 Train.png)
+![Training Metrics ResNet-50](images/ResNet-50_Train.png)
 
 #### Grad-CAM Visualizations
 - **Benign Tissue**:
-  ![Grad-CAM for Benign](images/GradCam ResNet 50.png)
+  ![Grad-CAM for Benign](images/GradCam_ResNet_50.png)
 - **Gleason 3**:
-  ![Grad-CAM for Gleason 3](images/im2 GradCam ResNet 50.png)
+  ![Grad-CAM for Gleason 3](images/im2_GradCam_ResNet_50.png)
 - **Gleason 4**:
-  ![Grad-CAM for Gleason 4](images/im3 GradCam ResNet 50.png)
+  ![Grad-CAM for Gleason 4](images/im3_GradCam_ResNet_50.png)
 - **Gleason 5**:
-  ![Grad-CAM for Gleason 5](images/im4 GradCam ResNet 50.png)
+  ![Grad-CAM for Gleason 5](images/im4_GradCam_ResNet_50.png)
 
 #### Classification Metrics for ResNet-50
-![Classification Report](images/ResNet 50 accuracy.png)
+![Classification Report](images/ResNet_50_accuracy.png)
 
 #### Misclassified Example
-![Misclassified Example](images/ResNet 50 misclassified.png)
+![Misclassified Example](images/ResNet_50_misclassified.png)
 
 #### Confusion Matrix
-![Confusion Matrix](images/ResNet50 ConfMatrix.png)
+![Confusion Matrix](images/ResNet50_ConfMatrix.png)
 
 ## Dataset
 The dataset contains **200 tissue microarray (TMA) images**, divided into training, validation, and testing sets in a **70:15:15** ratio. The images are categorized into the following classes:
