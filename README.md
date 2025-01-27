@@ -1,72 +1,121 @@
 # Automated Gleason Scoring System
 
-This repository contains an implementation of an automated Gleason scoring system using convolutional neural network (CNN) models such as **ResNet-50** and **EfficientNet**. The aim is to classify prostate tissue into Gleason scores to assist in the diagnosis of prostate cancer.
+This project is an implementation of an automated Gleason scoring system using convolutional neural network (CNN) models, specifically **ResNet-50** and **EfficientNet**. The goal is to classify prostate tissue into Gleason scores, helping to improve the diagnosis of prostate cancer.
 
 ## Overview
 
 ### Models Used
-- **ResNet-50**: A pretrained CNN model used for image classification. It achieved an accuracy of 97% during testing, demonstrating high reliability in predicting Gleason grades.
-- **EfficientNet**: Another CNN model used for comparison. It achieved an accuracy of 62%, showing moderate performance.
+- **ResNet-50**: This model achieved an impressive **97% accuracy** during testing, proving to be highly reliable in predicting Gleason grades.
+- **EfficientNet**: This model achieved a **62% accuracy**, performing moderately well in comparison.
 
-### Visualization
-- **Grad-CAM**: Grad-CAM visualizations were used to highlight areas of tissue predicted to have tumors. This helps understand what features the model focuses on while making predictions.
+### Visualizations
+Here are some visualizations to better understand the results:
+
+#### Original and Augmented Images
+![Original and Augmented Images](images/data.png)
+
+#### Training Metrics for EfficientNet
+![Training Metrics EfficientNet](images/EfficientNet_Train.png)
+
+#### Training Metrics for ResNet-50
+![Training Metrics ResNet-50](images/ResNet-50_Train.png)
+
+#### Grad-CAM Visualizations
+- **Benign Tissue**:
+  ![Grad-CAM for Benign](images/GradCam_ResNet_50.png)
+- **Gleason 3**:
+  ![Grad-CAM for Gleason 3](images/im2_GradCam_ResNet_50.png)
+- **Gleason 4**:
+  ![Grad-CAM for Gleason 4](images/im3_GradCam_ResNet_50.png)
+- **Gleason 5**:
+  ![Grad-CAM for Gleason 5](images/im4_GradCam_ResNet_50.png)
+
+#### Classification Metrics for ResNet-50
+![Classification Report](images/ResNet_50_accuracy.png)
+
+#### Misclassified Example
+![Misclassified Example](images/ResNet_50_misclassified.png)
+
+#### Confusion Matrix
+![Confusion Matrix](images/ResNet50_ConfMatrix.png)
 
 ## Dataset
-- The dataset used contains **200 tissue microarray (TMA) images**, split in a **70:15:15** ratio for training, validation, and testing.
-- The images were labeled into **4 categories**: Benign, Gleason3, Gleason4, and Gleason5.
+The dataset contains **200 tissue microarray (TMA) images**, divided into training, validation, and testing sets in a **70:15:15** ratio. The images are categorized into the following classes:
+- **Benign**
+- **Gleason3**
+- **Gleason4**
+- **Gleason5**
 
 ## Methodology
+1. **Data Preparation**
+   - The dataset was divided into training, validation, and test sets.
+   - Images were resized, normalized, and augmented to improve model performance.
 
-1. **Data Splitting and Preprocessing**
-   - The dataset was split into training, validation, and test sets.
-   - Images were preprocessed by resizing, normalization, and augmentation.
-
-2. **Model Training and Testing**
-   - **ResNet-50** and **EfficientNet** were trained for **10 epochs** each.
-   - **Dropout** and **batch normalization** were used to prevent overfitting.
-   - **Learning rate scheduler** was applied to optimize the learning process.
+2. **Model Training**
+   - Models were trained using the PyTorch framework.
+   - Techniques like dropout and learning rate scheduling were used to prevent overfitting and optimize performance.
 
 3. **Visualization**
-   - **Grad-CAM** was applied to visualize model predictions on various tissue samples.
-   - Example visualizations and misclassified images are available to better understand the model behavior.
+   - Grad-CAM was used to visualize the areas of tissue influencing the model’s predictions.
+
+## Models
+The repository includes the following saved PyTorch models:
+
+1. **EfficientNet**:
+   - Location: `models/efficientnet_best.pth`
+   - Description: Trained EfficientNet model with a test accuracy of 62%.
+
+2. **ResNet-50**:
+   - Location: `models/resnet_best.pth`
+   - Description: Trained ResNet-50 model with a test accuracy of 97%.
+
+You can load these models for inference or further fine-tuning using the code below:
+
+```python
+import torch
+from efficientnet_pytorch import EfficientNet
+from torchvision.models import resnet50
+
+# Load ResNet-50
+resnet_model = resnet50(pretrained=False)
+resnet_model.load_state_dict(torch.load("models/resnet_best.pth"))
+resnet_model.eval()
+
+# Load EfficientNet
+efficientnet_model = EfficientNet.from_name("efficientnet-b0")
+efficientnet_model.load_state_dict(torch.load("models/efficientnet_best.pth"))
+efficientnet_model.eval()
+```
 
 ## Results
-- **ResNet-50** achieved a test accuracy of **97%**, showing high reliability.
-- **EfficientNet** achieved a test accuracy of **62%**, with room for further optimization.
-- Grad-CAM visualization helped in identifying the regions that influenced the predictions the most.
+- **ResNet-50** achieved a test accuracy of **97%**, making it a reliable choice for classification.
+- **EfficientNet** achieved a test accuracy of **62%**, with potential for improvement.
+- Grad-CAM visualizations effectively highlighted tumor regions in tissue samples.
 
-## Future Improvements
-- Increase dataset size to enhance model robustness.
-- Experiment with other architectures like **MobileNet** or **DenseNet** to identify the most suitable model for resource-constrained environments.
-- Create **ensemble models** to improve overall prediction accuracy.
+## Future Work
+- Expand the dataset to improve model generalization.
+- Experiment with other CNN architectures like **DenseNet**.
+- Develop ensemble models to boost overall performance.
 
-## Repository Structure
-- **/data**: Contains the TMA dataset (not included due to size restrictions).
-- **/src**: Contains all Python scripts for model training, testing, and visualization.
-- **README.md**: Project description and instructions for use.
-
-## Usage Instructions
-1. Clone the repository:
-   ```
-   git clone https://github.com/yourusername/gleason-scoring-system.git
+## How to Use
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/yourusername/gleason-score-classifier.git
    ```
 
-2. Install dependencies:
-   ```
+2. Install the required dependencies:
+   ```bash
    pip install -r requirements.txt
    ```
 
-3. Run the main script for training and testing:
-   ```
-   python src/main.py
+3. Open and run the Jupyter Notebook for training and testing:
+   ```bash
+   jupyter notebook src/Gleason_Score_Classifier.ipynb
    ```
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. Feel free to use and modify the code as needed.
 
 ## Acknowledgments
-- The models are based on the PyTorch framework and use pretrained weights from **torchvision**.
-- Grad-CAM implementation was inspired by related research in model interpretability.
-
-## Contact
-For any questions or collaborations, please reach out at your.email@example.com.
+- This implementation leverages the **PyTorch** framework.
+- Grad-CAM visualizations were inspired by research on model interpretability.
