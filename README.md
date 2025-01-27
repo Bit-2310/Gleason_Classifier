@@ -15,7 +15,7 @@ Here are some visualizations to better understand the results:
 ![Original and Augmented Images](images/data.png)
 
 #### Training Metrics for EfficientNet
-![Training Metrics EfficientNet](images/EffecientNet_Tain.png)
+![Training Metrics EfficientNet](images/EfficientNet_Train.png)
 
 #### Training Metrics for ResNet-50
 ![Training Metrics ResNet-50](images/ResNet-50_Train.png)
